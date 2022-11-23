@@ -1,27 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-import React,{useEffect} from "react";
-import axios from "axios"
-function App() {
+import React,{useState} from "react";
+import Home from './Home';
+import MealPlan from "./MealPlan";
+import RecipeByNutrients from "./RecipeByNutrients";
+import RecipeByIng from "./RecipeByIng";
+import IngRecipeDetail from "./RecipeByIngDetail";
+import NutrientsRecipeDetail from "./NutrientsRecipeDetail"
+import Nav from "./nav"
+import Recipe from "./Recipe";
+import {BrowserRouter as Router, Routes,Route} from "react-router-dom"
 
-  const x="";
-  React.useEffect(() => {
-   
-    axios.get(`/api/test`).then(res => {
-          console.log(res);
-          x=res;
-    })
-        
-      }
-   );
 
+const App = () => {
+  console.log(process.env.REACT_APP_API_KEY);
   return (
-    <div className="App">
-     <h1>
-hello{x}
-     </h1>
-    </div>
-  );
+    <Router basename='/'>
+    <Nav/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/recipe" element={<Recipe/>}/>
+        <Route path="/mealPlan" element={<MealPlan/>}/>
+        <Route path="/recipeByNutrients" element={<RecipeByNutrients/>}/>
+        <Route path="/nutrientsRecipeDetail" element={<NutrientsRecipeDetail/>}/>
+        <Route path="/RecipeByIng" element={<RecipeByIng/>}/>
+        <Route path="/ingredientsRecipeDetail" element={<IngRecipeDetail/>}/>
+
+      </Routes>
+    </Router>
+    
+  )
 }
 
-export default App;
+export default App
+
+
